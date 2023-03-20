@@ -22,7 +22,7 @@ function trataErro(erro){
 async function pegaArquivo(caminhoDoArquivo){
     try{ 
         const texto = await fs.promises.readFile(caminhoDoArquivo, 'utf-8');
-        console.log(extraiLinks(texto));
+        return(extraiLinks(texto));
     } catch(erro){
         trataErro(erro)
     }
