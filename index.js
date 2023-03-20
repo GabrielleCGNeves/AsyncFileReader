@@ -7,10 +7,13 @@ function trataErro(erro){
 }
 
 function pegaArquivo(caminhoDoArquivo){
-    fs.promises
-    .readFile(caminhoDoArquivo, 'utf-8')
-    .then((texto) => console.log(texto))
-    .catch((erro) => trataErro(erro))
+    const encoding = 'utf-8';
+    fs.readFile(caminhoDoArquivo, 'utf-8', (erro, texto) => {
+        if(erro){
+            trataErro(erro);
+        }
+        console.log(chalk.green(texto));
+    })
 }
 
 pegaArquivo('./arquivos/texto.md')
