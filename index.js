@@ -6,14 +6,13 @@ function trataErro(erro){
     throw new Error(chalk.red(erro.code, "ARQUIVO NÃO ENCONTRADO"));
 }
 
-function pegaArquivo(caminhoDoArquivo){
-    const encoding = 'utf-8';
-    fs.readFile(caminhoDoArquivo, 'utf-8', (erro, texto) => {
-        if(erro){
-            trataErro(erro);
-        }
-        console.log(chalk.green(texto));
-    })
+async function pegaArquivo(caminhoDoArquivo){
+    try{ 
+        const texto = await fs.promises.readFile(caminhoDoArquivo, 'utf-8');
+        console.log(texto);
+    } catch(erro){
+        trataErro(erro)
+    }
 }
 
 pegaArquivo('./arquivos/texto.md')
